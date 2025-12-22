@@ -1,7 +1,7 @@
 services:
   docs:
-    image: ilmercato_local_docs
-    container_name: ilmercato_local_docs
+    image: hotel_local_docs
+    container_name: hotel_local_docs
     build:
       context: .
       dockerfile: ./compose/local/docs/Dockerfile
@@ -11,7 +11,7 @@ services:
       - /app/.venv
       - ./docs:/docs:z
       - ./config:/app/config:z
-      - ./ilmercato:/app/ilmercato:z
+      - ./hotel:/app/hotel:z
     ports:
       - '9000:9000'
     command: /start-docs

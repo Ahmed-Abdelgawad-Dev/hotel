@@ -59,8 +59,7 @@ docs/_build/
 # PyBuilder
 target/
 
-# celery beat schedule file
-celerybeat-schedule
+
 
 # Environments
 .venv
@@ -269,6 +268,6 @@ tags
 dump.rdb
 
 ### Project template
-ilmercato/media/
+hotel/media/
 
 .pytest_cache/

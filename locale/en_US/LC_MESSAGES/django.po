@@ -1,6 +1,6 @@
-# Translations for the Ilmercato project
-# Copyright (C) 2025 Ahmed AbdelMoneim
-# Ahmed AbdelMoneim <ahmed.abdelgawad.dev@gmail.com>, 2025.
+# Translations for the hotel project
+# Copyright (C) 2025 Ahmed Abdelgawad
+# Ahmed Abdelgawad <ahmed.abdelgawad.dev@gmail.com>, 2025.
 #
 #, fuzzy
 msgid ""

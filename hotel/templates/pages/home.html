@@ -1,0 +1,378 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="relative h-screen">
+    <div class="absolute inset-0">
+        <img src="{% static 'images/landing.JPG' %}" alt="Il Mercato Hotel Exterior"
+            class="h-full w-full object-cover" />
+        <div class="absolute inset-0 bg-black/60 z-10"></div>
+    </div>
+
+    <div class="relative z-20 mx-auto max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-screen lg:items-center lg:px-8">
+        <div class="max-w-xl text-center sm:text-left">
+            <h1 class="text-3xl font-serif font-extrabold text-white sm:text-6xl drop-shadow-lg">
+                Elegance in
+                <strong class="block font-serif font-extrabold text-gold-500 drop-shadow-md"> Every Detail </strong>
+            </h1>
+
+            <p class="mt-4 max-w-lg text-white sm:text-xl/relaxed font-light drop-shadow">
+                Discover Il Mercato, where modern luxury meets timeless Italian design in the heart of Sharm El Sheikh.
+            </p>
+
+            <div class="mt-8 flex flex-wrap gap-4 text-center justify-center sm:justify-start">
+                <a href="{% url 'booking' %}"
+                    class="block w-full rounded-full bg-gradient-to-r from-gold-400 to-gold-600 px-12 py-4 text-sm font-bold text-white shadow-lg shadow-gold-500/30 hover:from-gold-500 hover:to-gold-700 hover:shadow-gold-500/50 hover:-translate-y-1 focus:outline-none focus:ring active:bg-gold-500 sm:w-auto uppercase tracking-widest transition-all duration-300">
+                    Book Your Stay
+                </a>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+<!-- Hot Offers Section -->
+<section id="offers" class="bg-gray-50 dark:bg-gray-900 py-20 transition-colors duration-300">
+    <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-serif font-bold text-gray-900 dark:text-white text-center mb-12 italic">Exclusive
+            Offers</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div
+                class="group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:shadow-gold-500/20">
+                <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=800&q=80"
+                    alt="Honeymoon Package"
+                    class="h-80 w-full object-cover transition duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                <div
+                    class="absolute bottom-0 p-8 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                    <h3 class="text-2xl font-bold text-white font-serif">Honeymoon Bliss</h3>
+                    <p class="mt-2 text-gray-200 opacity-90">Enjoy 20% off plus a complimentary spa treatment for two.
+                    </p>
+                    <a href="{% url 'booking' %}"
+                        class="mt-6 inline-block text-gold-400 hover:text-white transition uppercase text-xs tracking-widest font-bold border-b border-gold-400 hover:border-white pb-1">Book
+                        Now</a>
+                </div>
+            </div>
+            <div
+                class="group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:shadow-gold-500/20">
+                <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                    alt="Early Bird" class="h-80 w-full object-cover transition duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                <div
+                    class="absolute bottom-0 p-8 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                    <h3 class="text-2xl font-bold text-white font-serif">Early Bird Special</h3>
+                    <p class="mt-2 text-gray-200 opacity-90">Book 60 days in advance and save 15% on your luxury stay.
+                    </p>
+                    <a href="{% url 'booking' %}"
+                        class="mt-6 inline-block text-gold-400 hover:text-white transition uppercase text-xs tracking-widest font-bold border-b border-gold-400 hover:border-white pb-1">Check
+                        Availability</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Rooms Preview Section -->
+<section id="rooms" class="bg-white dark:bg-dark-800 py-24 transition-colors duration-300">
+    <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-serif font-bold text-gray-900 dark:text-white sm:text-5xl">Luxurious Accommodation
+            </h2>
+            <p class="mt-6 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg font-light">
+                Each room is a sanctuary of peace, featuring bespoke furnishings, modern amenities, and breathtaking
+                views.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-4">
+            <!-- Room 1: Standard -->
+            <a href="{% url 'rooms' %}"
+                class="group block bg-gray-50 dark:bg-gray-900 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-gold-500/10 transition-all duration-300 transform hover:-translate-y-2">
+                <div class="relative h-[250px] overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=800&q=80"
+                        alt="Standard Room"
+                        class="absolute inset-0 h-full w-full object-cover opacity-100 group-hover:scale-110 transition duration-700" />
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60 group-hover:opacity-40 transition duration-500">
+                    </div>
+                    <span
+                        class="absolute top-4 right-4 bg-white/90 dark:bg-gray-900/90 backdrop-blur text-gray-900 dark:text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">
+                        Standard
+                    </span>
+                </div>
+
+                <div class="p-6">
+                    <h3
+                        class="text-xl font-serif text-gray-900 dark:text-white group-hover:text-gold-600 dark:group-hover:text-gold-400 transition">
+                        Standard Room</h3>
+                    <p class="mt-2 line-clamp-2 text-sm text-gray-600 dark:text-gray-400 font-light">
+                        Cozy and elegant, perfect for solo travelers or couples seeking comfort.
+                    </p>
+                    <div
+                        class="mt-4 flex items-center justify-between border-t border-gray-200 dark:border-gray-800 pt-4">
+                        <span class="text-gold-600 dark:text-gold-400 font-bold text-lg">$150 <span
+                                class="text-xs text-gray-500 font-normal">/ night</span></span>
+                        <span
+                            class="text-gray-900 dark:text-white text-xs uppercase tracking-wider font-bold group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">Details
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg></span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Room 2: Superior -->
+            <a href="{% url 'rooms' %}"
+                class="group block bg-gray-50 dark:bg-gray-900 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-gold-500/10 transition-all duration-300 transform hover:-translate-y-2">
+                <div class="relative h-[250px] overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=800&q=80"
+                        alt="Superior Room"
+                        class="absolute inset-0 h-full w-full object-cover opacity-100 group-hover:scale-110 transition duration-700" />
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60 group-hover:opacity-40 transition duration-500">
+                    </div>
+                    <span
+                        class="absolute top-4 right-4 bg-white/90 dark:bg-gray-900/90 backdrop-blur text-gray-900 dark:text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">
+                        Superior
+                    </span>
+                </div>
+
+                <div class="p-6">
+                    <h3
+                        class="text-xl font-serif text-gray-900 dark:text-white group-hover:text-gold-600 dark:group-hover:text-gold-400 transition">
+                        Superior Room</h3>
+                    <p class="mt-2 line-clamp-2 text-sm text-gray-600 dark:text-gray-400 font-light">
+                        Added space and luxury with a balcony overlooking the beautiful gardens.
+                    </p>
+                    <div
+                        class="mt-4 flex items-center justify-between border-t border-gray-200 dark:border-gray-800 pt-4">
+                        <span class="text-gold-600 dark:text-gold-400 font-bold text-lg">$200 <span
+                                class="text-xs text-gray-500 font-normal">/ night</span></span>
+                        <span
+                            class="text-gray-900 dark:text-white text-xs uppercase tracking-wider font-bold group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">Details
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg></span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Room 3: Deluxe -->
+            <a href="{% url 'rooms' %}"
+                class="group block bg-gray-50 dark:bg-gray-900 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-gold-500/10 transition-all duration-300 transform hover:-translate-y-2">
+                <div class="relative h-[250px] overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=800&q=80"
+                        alt="Deluxe Suite"
+                        class="absolute inset-0 h-full w-full object-cover opacity-100 group-hover:scale-110 transition duration-700" />
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60 group-hover:opacity-40 transition duration-500">
+                    </div>
+                    <span
+                        class="absolute top-4 right-4 bg-white/90 dark:bg-gray-900/90 backdrop-blur text-gray-900 dark:text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">
+                        Deluxe
+                    </span>
+                </div>
+
+                <div class="p-6">
+                    <h3
+                        class="text-xl font-serif text-gray-900 dark:text-white group-hover:text-gold-600 dark:group-hover:text-gold-400 transition">
+                        Deluxe Suite</h3>
+                    <p class="mt-2 line-clamp-2 text-sm text-gray-600 dark:text-gray-400 font-light">
+                        Spacious suite offering city views, king-sized bed, and elegant marble bathroom.
+                    </p>
+                    <div
+                        class="mt-4 flex items-center justify-between border-t border-gray-200 dark:border-gray-800 pt-4">
+                        <span class="text-gold-600 dark:text-gold-400 font-bold text-lg">$250 <span
+                                class="text-xs text-gray-500 font-normal">/ night</span></span>
+                        <span
+                            class="text-gray-900 dark:text-white text-xs uppercase tracking-wider font-bold group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">Details
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg></span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Room 4: Family -->
+            <a href="{% url 'rooms' %}"
+                class="group block bg-gray-50 dark:bg-gray-900 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-gold-500/10 transition-all duration-300 transform hover:-translate-y-2">
+                <div class="relative h-[250px] overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=800&q=80"
+                        alt="Family Room"
+                        class="absolute inset-0 h-full w-full object-cover opacity-100 group-hover:scale-110 transition duration-700" />
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60 group-hover:opacity-40 transition duration-500">
+                    </div>
+                    <span
+                        class="absolute top-4 right-4 bg-white/90 dark:bg-gray-900/90 backdrop-blur text-gray-900 dark:text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">
+                        Family
+                    </span>
+                </div>
+
+                <div class="p-6">
+                    <h3
+                        class="text-xl font-serif text-gray-900 dark:text-white group-hover:text-gold-600 dark:group-hover:text-gold-400 transition">
+                        Family House</h3>
+                    <p class="mt-2 line-clamp-2 text-sm text-gray-600 dark:text-gray-400 font-light">
+                        Ample space for the whole family with interconnected rooms and kid-friendly amenities.
+                    </p>
+                    <div
+                        class="mt-4 flex items-center justify-between border-t border-gray-200 dark:border-gray-800 pt-4">
+                        <span class="text-gold-600 dark:text-gold-400 font-bold text-lg">$400 <span
+                                class="text-xs text-gray-500 font-normal">/ night</span></span>
+                        <span
+                            class="text-gray-900 dark:text-white text-xs uppercase tracking-wider font-bold group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">Details
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg></span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="mt-16 text-center">
+            <a href="{% url 'rooms' %}"
+                class="inline-block rounded-full bg-gray-900 dark:bg-white px-12 py-4 text-sm font-bold text-white dark:text-gray-900 transition hover:bg-gold-600 dark:hover:bg-gold-400 hover:text-white dark:hover:text-gray-900 hover:shadow-lg hover:-translate-y-1 focus:outline-none focus:ring uppercase tracking-widest">
+                View All Collections
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Reviews Section -->
+<section id="reviews" class="bg-gray-50 dark:bg-gray-900 py-24 transition-colors duration-300">
+    <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-center text-3xl font-serif font-bold text-gray-900 dark:text-white sm:text-5xl">Guest
+            Experiences</h2>
+
+        <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <blockquote
+                class="rounded-3xl bg-white dark:bg-dark-800 p-8 shadow-lg border border-gray-100 dark:border-gray-800 hover:-translate-y-1 transition duration-300">
+                <div class="flex items-center gap-4">
+                    <img alt="Man"
+                        src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
+                        class="h-16 w-16 rounded-full object-cover ring-2 ring-gold-500" />
+                    <div>
+                        <div class="flex justify-start gap-1 text-gold-500">
+                            <!-- Stars -->
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                        </div>
+                        <p class="mt-1 text-lg font-medium text-gray-900 dark:text-white">Paul Starr</p>
+                    </div>
+                </div>
+
+                <p class="mt-4 text-gray-600 dark:text-gray-400 italic">
+                    "Absolutely stunning hotel. The attention to detail is impeccable, and the staff treated us like
+                    royalty. Highly recommended!"
+                </p>
+            </blockquote>
+
+            <blockquote
+                class="rounded-3xl bg-white dark:bg-dark-800 p-8 shadow-lg border border-gray-100 dark:border-gray-800 hover:-translate-y-1 transition duration-300">
+                <div class="flex items-center gap-4">
+                    <img alt="Woman"
+                        src="https://images.unsplash.com/photo-1588514120392-50d4e320d778?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+                        class="h-16 w-16 rounded-full object-cover ring-2 ring-gold-500" />
+                    <div>
+                        <div class="flex justify-start gap-1 text-gold-500">
+                            <!-- Stars -->
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                        </div>
+                        <p class="mt-1 text-lg font-medium text-gray-900 dark:text-white">Sarah Jenkins</p>
+                    </div>
+                </div>
+
+                <p class="mt-4 text-gray-600 dark:text-gray-400 italic">
+                    "The spa services were out of this world. Best massage I've ever had. The food at the Italian
+                    restaurant was authentic and delicious."
+                </p>
+            </blockquote>
+
+            <blockquote
+                class="rounded-3xl bg-white dark:bg-dark-800 p-8 shadow-lg border border-gray-100 dark:border-gray-800 hover:-translate-y-1 transition duration-300">
+                <div class="flex items-center gap-4">
+                    <div
+                        class="h-16 w-16 rounded-full bg-gold-600 flex items-center justify-center text-white font-bold text-xl ring-2 ring-gold-400">
+                        JD
+                    </div>
+                    <div>
+                        <div class="flex justify-start gap-1 text-gold-500">
+                            <!-- Stars -->
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                        </div>
+                        <p class="mt-1 text-lg font-medium text-gray-900 dark:text-white">John Doe</p>
+                    </div>
+                </div>
+
+                <p class="mt-4 text-gray-600 dark:text-gray-400 italic">
+                    "A perfect getaway. The room was clean, modern and very comfortable. I will definitely be coming
+                    back next year."
+                </p>
+            </blockquote>
+        </div>
+    </div>
+</section>
+{% endblock content %}

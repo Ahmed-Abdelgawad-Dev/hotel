@@ -4,14 +4,14 @@ How To - Project Documentation
 Get Started
 ----------------------------------------------------------------------
 
-Documentation can be written as rst files in `ilmercato/docs`.
+Documentation can be written as rst files in `hotel/docs`.
 
 
 To build and serve docs, use the command::
 
     uv run make livehtml
 
-from inside the `ilmercato/docs` directory.
+from inside the `hotel/docs` directory.
 
 
 Changes to files in `docs/_source` will be picked up and reloaded automatically.

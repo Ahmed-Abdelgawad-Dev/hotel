@@ -19,9 +19,9 @@ def main():
         ) from exc
 
     # This allows easy placement of apps within the interior
-    # ilmercato directory.
+    # hotel directory.
     current_path = Path(__file__).parent.resolve()
-    sys.path.append(str(current_path / "ilmercato"))
+    sys.path.append(str(current_path / "hotel"))
 
     execute_from_command_line(sys.argv)
 

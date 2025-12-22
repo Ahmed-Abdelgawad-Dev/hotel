@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Rooms & Suites - Il Mercato Hotel{% endblock title %}
+
+{% block content %}
+<section class="bg-gray-50 dark:bg-gray-900 py-24 min-h-screen transition-colors duration-300">
+    <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-serif font-extrabold text-gray-900 dark:text-white mb-4 sm:text-5xl">Our
+                Collections</h2>
+            <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg font-light">
+                Indulge in our carefully curated selection of rooms and suites, designed to provide the ultimate in
+                comfort and style.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            <!-- Room 1: Standard -->
+            <div
+                class="bg-white dark:bg-dark-800 rounded-3xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-800 hover:shadow-2xl hover:shadow-gold-500/10 transition-all duration-300 group">
+                <div class="relative overflow-hidden h-72">
+                    <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=800&q=80"
+                        alt="Standard Room"
+                        class="h-full w-full object-cover transform group-hover:scale-110 transition duration-700">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition duration-500">
+                    </div>
+                </div>
+                <div class="p-8">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3
+                            class="text-2xl font-serif font-semibold text-gray-900 dark:text-white group-hover:text-gold-600 dark:group-hover:text-gold-400 transition">
+                            Standard Room</h3>
+                        <span
+                            class="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Most
+                            Popular</span>
+                    </div>
+
+                    <div class="flex items-center text-gray-500 dark:text-gray-400 text-sm font-medium mb-4">
+                        <span class="flex items-center gap-1.5"><svg class="w-4 h-4 text-gold-500" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                </path>
+                            </svg> 35 m²</span>
+                        <span class="mx-3 text-gray-300 dark:text-gray-600">•</span>
+                        <span class="flex items-center gap-1.5"><svg class="w-4 h-4 text-gold-500" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg> 2 Adults</span>
+                    </div>
+
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed font-light mb-8">Cozy and elegant,
+                        perfect for solo travelers or couples seeking comfort. Features a queen-sized bed and walk-in
+                        shower.</p>
+
+                    <div class="flex items-center justify-between border-t border-gray-100 dark:border-gray-700 pt-6">
+                        <span class="text-2xl font-bold text-gold-600 dark:text-gold-400">$150<span
+                                class="text-sm text-gray-500 font-normal">/night</span></span>
+                        <a href="{% url 'booking' %}"
+                            class="rounded-full bg-gradient-to-r from-gold-400 to-gold-600 px-8 py-3 text-sm font-bold text-white shadow-lg shadow-gold-500/20 transition-all hover:from-gold-500 hover:to-gold-700 hover:shadow-gold-500/40 hover:-translate-y-0.5 uppercase tracking-wider">Book
+                            Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room 2: Superior -->
+            <div
+                class="bg-white dark:bg-dark-800 rounded-3xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-800 hover:shadow-2xl hover:shadow-gold-500/10 transition-all duration-300 group">
+                <div class="relative overflow-hidden h-72">
+                    <img src="https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=800&q=80"
+                        alt="Superior Room"
+                        class="h-full w-full object-cover transform group-hover:scale-110 transition duration-700">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition duration-500">
+                    </div>
+                </div>
+                <div class="p-8">
+                    <h3
+                        class="text-2xl font-serif font-semibold text-gray-900 dark:text-white group-hover:text-gold-600 dark:group-hover:text-gold-400 transition mb-4">
+                        Superior Room</h3>
+
+                    <div class="flex items-center text-gray-500 dark:text-gray-400 text-sm font-medium mb-4">
+                        <span class="flex items-center gap-1.5"><svg class="w-4 h-4 text-gold-500" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                </path>
+                            </svg> 45 m²</span>
+                        <span class="mx-3 text-gray-300 dark:text-gray-600">•</span>
+                        <span class="flex items-center gap-1.5"><svg class="w-4 h-4 text-gold-500" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg> 2 Adults, 1 Child</span>
+                    </div>
+
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed font-light mb-8">Added space and luxury
+                        with a balcony overlooking the beautiful gardens. Includes a workspace and mini-bar.</p>
+
+                    <div class="flex items-center justify-between border-t border-gray-100 dark:border-gray-700 pt-6">
+                        <span class="text-2xl font-bold text-gold-600 dark:text-gold-400">$200<span
+                                class="text-sm text-gray-500 font-normal">/night</span></span>
+                        <a href="{% url 'booking' %}"
+                            class="rounded-full bg-gradient-to-r from-gold-400 to-gold-600 px-8 py-3 text-sm font-bold text-white shadow-lg shadow-gold-500/20 transition-all hover:from-gold-500 hover:to-gold-700 hover:shadow-gold-500/40 hover:-translate-y-0.5 uppercase tracking-wider">Book
+                            Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room 3: Deluxe -->
+            <div
+                class="bg-white dark:bg-dark-800 rounded-3xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-800 hover:shadow-2xl hover:shadow-gold-500/10 transition-all duration-300 group">
+                <div class="relative overflow-hidden h-72">
+                    <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=800&q=80"
+                        alt="Deluxe Suite"
+                        class="h-full w-full object-cover transform group-hover:scale-110 transition duration-700">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition duration-500">
+                    </div>
+                </div>
+                <div class="p-8">
+                    <h3
+                        class="text-2xl font-serif font-semibold text-gray-900 dark:text-white group-hover:text-gold-600 dark:group-hover:text-gold-400 transition mb-4">
+                        Deluxe Suite</h3>
+                    <div class="flex items-center text-gray-500 dark:text-gray-400 text-sm font-medium mb-4">
+                        <span class="flex items-center gap-1.5"><svg class="w-4 h-4 text-gold-500" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                </path>
+                            </svg> 55 m²</span>
+                        <span class="mx-3 text-gray-300 dark:text-gray-600">•</span>
+                        <span class="flex items-center gap-1.5"><svg class="w-4 h-4 text-gold-500" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg> 2 Adults</span>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed font-light mb-8">Spacious suite offering
+                        city views, king-sized bed, and elegant marble bathroom with soaking tub.</p>
+                    <div class="flex items-center justify-between border-t border-gray-100 dark:border-gray-700 pt-6">
+                        <span class="text-2xl font-bold text-gold-600 dark:text-gold-400">$250<span
+                                class="text-sm text-gray-500 font-normal">/night</span></span>
+                        <a href="{% url 'booking' %}"
+                            class="rounded-full bg-gradient-to-r from-gold-400 to-gold-600 px-8 py-3 text-sm font-bold text-white shadow-lg shadow-gold-500/20 transition-all hover:from-gold-500 hover:to-gold-700 hover:shadow-gold-500/40 hover:-translate-y-0.5 uppercase tracking-wider">Book
+                            Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room 4: Family -->
+            <div
+                class="bg-white dark:bg-dark-800 rounded-3xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-800 hover:shadow-2xl hover:shadow-gold-500/10 transition-all duration-300 group">
+                <div class="relative overflow-hidden h-72">
+                    <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=800&q=80"
+                        alt="Family Residence"
+                        class="h-full w-full object-cover transform group-hover:scale-110 transition duration-700">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition duration-500">
+                    </div>
+                </div>
+                <div class="p-8">
+                    <h3
+                        class="text-2xl font-serif font-semibold text-gray-900 dark:text-white group-hover:text-gold-600 dark:group-hover:text-gold-400 transition mb-4">
+                        Family Residence</h3>
+                    <div class="flex items-center text-gray-500 dark:text-gray-400 text-sm font-medium mb-4">
+                        <span class="flex items-center gap-1.5"><svg class="w-4 h-4 text-gold-500" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                </path>
+                            </svg> 65 m²</span>
+                        <span class="mx-3 text-gray-300 dark:text-gray-600">•</span>
+                        <span class="flex items-center gap-1.5"><svg class="w-4 h-4 text-gold-500" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg> 4 Adults</span>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed font-light mb-8">Designed for families,
+                        featuring 2 interconnected rooms, kid-friendly amenities and a large living area.</p>
+                    <div class="flex items-center justify-between border-t border-gray-100 dark:border-gray-700 pt-6">
+                        <span class="text-2xl font-bold text-gold-600 dark:text-gold-400">$400<span
+                                class="text-sm text-gray-500 font-normal">/night</span></span>
+                        <a href="{% url 'booking' %}"
+                            class="rounded-full bg-gradient-to-r from-gold-400 to-gold-600 px-8 py-3 text-sm font-bold text-white shadow-lg shadow-gold-500/20 transition-all hover:from-gold-500 hover:to-gold-700 hover:shadow-gold-500/40 hover:-translate-y-0.5 uppercase tracking-wider">Book
+                            Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

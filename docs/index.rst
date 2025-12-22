@@ -1,9 +1,9 @@
-.. Ilmercato documentation master file, created by
+.. hotel documentation master file, created by
    sphinx-quickstart.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Ilmercato's documentation!
+Welcome to hotel's documentation!
 ======================================================================
 
 .. toctree::
