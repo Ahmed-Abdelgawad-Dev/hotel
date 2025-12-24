@@ -1,0 +1,43 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n %}
+
+{% block head_title %}
+  {% trans "Account Inactive" %}
+{% endblock head_title %}
+
+{% block content %}
+  <div class="space-y-6 text-center">
+    <!-- Warning Icon -->
+    <div class="flex justify-center">
+      <div class="rounded-full bg-yellow-100 dark:bg-yellow-900/30 p-6">
+        <svg class="h-16 w-16 text-yellow-600 dark:text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Page Title -->
+    <div>
+      <h2 class="text-3xl font-serif font-bold text-gray-900 dark:text-white">
+        {% trans "Account Inactive" %}
+      </h2>
+      <p class="mt-4 text-sm text-gray-600 dark:text-gray-400 max-w-md mx-auto">
+        {% trans "This account is currently inactive. Please contact our support team for assistance." %}
+      </p>
+    </div>
+
+    <!-- Info Box -->
+    <div class="p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-xl border border-yellow-200 dark:border-yellow-800">
+      <p class="text-sm text-yellow-800 dark:text-yellow-200">
+        {% trans "If you believe this is an error, please reach out to customer support." %}
+      </p>
+    </div>
+
+    <!-- Actions -->
+    <div class="space-y-3">
+      <a href="{% url 'home' %}" class="inline-flex items-center justify-center w-full rounded-xl px-6 py-3 text-sm font-bold uppercase tracking-wider transition-all duration-300 bg-gradient-to-r from-gold-400 to-gold-600 text-white shadow-lg shadow-gold-500/20 hover:from-gold-500 hover:to-gold-700 hover:shadow-gold-500/40 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500">
+        {% trans "Return to Home" %}
+      </a>
+    </div>
+  </div>
+{% endblock content %}

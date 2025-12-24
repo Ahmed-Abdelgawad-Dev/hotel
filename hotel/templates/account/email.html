@@ -1,0 +1,137 @@
+{% extends "account/base_manage.html" %}
+{% load i18n %}
+{% load allauth account %}
+
+{% block head_title %}
+  {% trans "Email Addresses" %}
+{% endblock head_title %}
+
+{% block content %}
+  <div class="space-y-6">
+    <!-- Page Title -->
+    <div class="text-center">
+      <h2 class="text-3xl font-serif font-bold text-gray-900 dark:text-white">
+        {% trans "Email Addresses" %}
+      </h2>
+      <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+        {% trans "Manage your email addresses" %}
+      </p>
+    </div>
+
+    {% if emailaddresses %}
+      <!-- Email List -->
+      <div class="space-y-3">
+        <p class="text-sm font-medium text-gray-700 dark:text-gray-300">
+          {% trans "Your email addresses:" %}
+        </p>
+
+        {% for emailaddress in emailaddresses %}
+          <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
+            <div class="flex items-center space-x-3">
+              <div>
+                <p class="font-medium text-gray-900 dark:text-white">
+                  {{ emailaddress.email }}
+                </p>
+                <div class="flex items-center space-x-2 mt-1">
+                  {% if emailaddress.verified %}
+                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200">
+                      <svg class="h-3 w-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                      </svg>
+                      {% trans "Verified" %}
+                    </span>
+                  {% else %}
+                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200">
+                      {% trans "Unverified" %}
+                    </span>
+                  {% endif %}
+
+                  {% if emailaddress.primary %}
+                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gold-100 dark:bg-gold-900/30 text-gold-800 dark:text-gold-200">
+                      {% trans "Primary" %}
+                    </span>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-center space-x-2">
+              {% if not emailaddress.primary and emailaddress.verified %}
+                {% element form method="post" action="{% url 'account_email' %}" no_visible_fields=True %}
+                  {% slot body %}
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="primary" />
+                    <input type="hidden" name="email" value="{{ emailaddress.email }}" />
+                  {% endslot %}
+                  {% slot actions %}
+                    {% element button type="submit" tags="secondary" extra_attrs='class="!text-xs !py-2 !px-4 !w-auto"' %}
+                      {% trans "Make Primary" %}
+                    {% endelement %}
+                  {% endslot %}
+                {% endelement %}
+              {% endif %}
+
+              {% if not emailaddress.primary %}
+                {% element form method="post" action="{% url 'account_email' %}" no_visible_fields=True %}
+                  {% slot body %}
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="remove" />
+                    <input type="hidden" name="email" value="{{ emailaddress.email }}" />
+                  {% endslot %}
+                  {% slot actions %}
+                    {% element button type="submit" tags="danger" extra_attrs='class="!text-xs !py-2 !px-4 !w-auto"' %}
+                      {% trans "Remove" %}
+                    {% endelement %}
+                  {% endslot %}
+                {% endelement %}
+              {% endif %}
+
+              {% if not emailaddress.verified %}
+                {% element form method="post" action="{% url 'account_email' %}" no_visible_fields=True %}
+                  {% slot body %}
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="send" />
+                    <input type="hidden" name="email" value="{{ emailaddress.email }}" />
+                  {% endslot %}
+                  {% slot actions %}
+                    {% element button type="submit" tags="outline" extra_attrs='class="!text-xs !py-2 !px-4 !w-auto"' %}
+                      {% trans "Re-send Verification" %}
+                    {% endelement %}
+                  {% endslot %}
+                {% endelement %}
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <!-- Add Email Form -->
+    <div class="border-t border-gray-200 dark:border-gray-700 pt-6">
+      <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+        {% trans "Add Email Address" %}
+      </h3>
+
+      {% url 'account_email' as action_url %}
+      {% element form form=form method="post" action=action_url %}
+        {% slot body %}
+          {% csrf_token %}
+          {% element fields form=form unlabeled=False %}
+          {% endelement %}
+        {% endslot %}
+        {% slot actions %}
+          {% element button type="submit" tags="prominent" name="action" value="add" %}
+            {% trans "Add Email" %}
+          {% endelement %}
+        {% endslot %}
+      {% endelement %}
+    </div>
+
+    <!-- Back Link -->
+    <div class="text-center pt-4">
+      <a href="{% url 'home' %}" class="text-sm text-gold-600 dark:text-gold-400 hover:text-gold-700 dark:hover:text-gold-300 transition-colors font-medium">
+        {% trans "Return to Home" %}
+      </a>
+    </div>
+  </div>
+{% endblock content %}

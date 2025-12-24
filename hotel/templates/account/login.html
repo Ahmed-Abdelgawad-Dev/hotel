@@ -1,0 +1,108 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n %}
+{% load allauth account %}
+
+{% block head_title %}
+  {% trans "Sign In" %}
+{% endblock head_title %}
+
+{% block content %}
+  <div class="space-y-6">
+    <!-- Page Title -->
+    <div class="text-center">
+      <h2 class="text-3xl font-serif font-bold text-gray-900 dark:text-white">
+        {% trans "Welcome Back" %}
+      </h2>
+      <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+        {% trans "Sign in to your account to continue" %}
+      </p>
+    </div>
+
+    {% if not SOCIALACCOUNT_ONLY %}
+      <!-- Sign Up Link -->
+      {% setvar signup_url %}{% url 'account_signup' %}{% endsetvar %}
+      {% if signup_url %}
+        <div class="text-center p-4 bg-gold-50 dark:bg-gold-900/20 rounded-xl border border-gold-200 dark:border-gold-800">
+          <p class="text-sm text-gray-700 dark:text-gray-300">
+            {% trans "Don't have an account yet?" %}
+            <a href="{{ signup_url }}" class="font-bold text-gold-600 dark:text-gold-400 hover:text-gold-700 dark:hover:text-gold-300 transition-colors">
+              {% trans "Sign up now" %}
+            </a>
+          </p>
+        </div>
+      {% endif %}
+
+      <!-- Login Form -->
+      {% url 'account_login' as login_url %}
+      {% element form form=form method="post" action=login_url tags="entrance,login" %}
+        {% slot body %}
+          {% csrf_token %}
+          {% element fields form=form unlabeled=False %}
+          {% endelement %}
+          {{ redirect_field }}
+        {% endslot %}
+        {% slot actions %}
+          <div class="space-y-4">
+            {% element button type="submit" tags="prominent,login" %}
+              {% trans "Sign In" %}
+            {% endelement %}
+
+            <!-- Forgot Password Link -->
+            <div class="text-center">
+              <a href="{% url 'account_reset_password' %}" class="text-sm text-gold-600 dark:text-gold-400 hover:text-gold-700 dark:hover:text-gold-300 transition-colors font-medium">
+                {% trans "Forgot your password?" %}
+              </a>
+            </div>
+          </div>
+        {% endslot %}
+      {% endelement %}
+    {% endif %}
+
+    {% if LOGIN_BY_CODE_ENABLED or PASSKEY_LOGIN_ENABLED %}
+      <div class="relative">
+        <div class="absolute inset-0 flex items-center">
+          <div class="w-full border-t border-gray-300 dark:border-gray-600"></div>
+        </div>
+        <div class="relative flex justify-center text-sm">
+          <span class="px-4 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 font-medium">
+            {% trans "Or continue with" %}
+          </span>
+        </div>
+      </div>
+
+      {% element button_group vertical=True %}
+        {% if PASSKEY_LOGIN_ENABLED %}
+          {% element button type="submit" form="mfa_login" id="passkey_login" tags="outline,login" %}
+            {% trans "Sign in with a passkey" %}
+          {% endelement %}
+        {% endif %}
+        {% if LOGIN_BY_CODE_ENABLED %}
+          {% element button href=request_login_code_url tags="outline,login" %}
+            {% trans "Send me a sign-in code" %}
+          {% endelement %}
+        {% endif %}
+      {% endelement %}
+    {% endif %}
+
+    {% if SOCIALACCOUNT_ENABLED %}
+      <div class="relative">
+        <div class="absolute inset-0 flex items-center">
+          <div class="w-full border-t border-gray-300 dark:border-gray-600"></div>
+        </div>
+        <div class="relative flex justify-center text-sm">
+          <span class="px-4 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 font-medium">
+            {% trans "Or sign in with" %}
+          </span>
+        </div>
+      </div>
+      {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+    {% endif %}
+  </div>
+{% endblock content %}
+
+{% block extra_body %}
+  {{ block.super }}
+  {% if PASSKEY_LOGIN_ENABLED %}
+    {% include "mfa/webauthn/snippets/login_script.html" with button_id="passkey_login" %}
+  {% endif %}
+{% endblock %}

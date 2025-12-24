@@ -1,0 +1,46 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n %}
+{% load allauth %}
+
+{% block head_title %}
+  {% trans "Verify Your Email" %}
+{% endblock head_title %}
+
+{% block content %}
+  <div class="space-y-6 text-center">
+    <!-- Email Icon -->
+    <div class="flex justify-center">
+      <div class="rounded-full bg-blue-100 dark:bg-blue-900/30 p-6">
+        <svg class="h-16 w-16 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 19v-8.93a2 2 0 01.89-1.664l7-4.666a2 2 0 012.22 0l7 4.666A2 2 0 0121 10.07V19M3 19a2 2 0 002 2h14a2 2 0 002-2M3 19l6.75-4.5M21 19l-6.75-4.5M3 10l6.75 4.5M21 10l-6.75 4.5m0 0l-1.14.76a2 2 0 01-2.22 0l-1.14-.76" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Page Title -->
+    <div>
+      <h2 class="text-3xl font-serif font-bold text-gray-900 dark:text-white">
+        {% trans "Verify Your Email" %}
+      </h2>
+      <p class="mt-4 text-sm text-gray-600 dark:text-gray-400 max-w-md mx-auto">
+        {% blocktrans %}
+          We've sent a verification email to your address. Please check your inbox and click the verification link to complete your registration.
+        {% endblocktrans %}
+      </p>
+    </div>
+
+    <!-- Info Box -->
+    <div class="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800">
+      <p class="text-sm text-blue-800 dark:text-blue-200">
+        {% trans "Didn't receive the email? Check your spam folder or contact support for assistance." %}
+      </p>
+    </div>
+
+    <!-- Actions -->
+    <div class="space-y-3">
+      <a href="{% url 'home' %}" class="inline-flex items-center justify-center w-full rounded-xl px-6 py-3 text-sm font-bold uppercase tracking-wider transition-all duration-300 bg-gradient-to-r from-gold-400 to-gold-600 text-white shadow-lg shadow-gold-500/20 hover:from-gold-500 hover:to-gold-700 hover:shadow-gold-500/40 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500">
+        {% trans "Return to Home" %}
+      </a>
+    </div>
+  </div>
+{% endblock content %}

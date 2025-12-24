@@ -271,3 +271,4 @@ dump.rdb
 hotel/media/
 
 .pytest_cache/
+download_assets.sh

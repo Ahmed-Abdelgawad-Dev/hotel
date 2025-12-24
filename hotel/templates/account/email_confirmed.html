@@ -1,0 +1,52 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n %}
+{% load allauth %}
+
+{% block head_title %}
+  {% trans "Email Confirmed" %}
+{% endblock head_title %}
+
+{% block content %}
+  <div class="space-y-6 text-center">
+    <!-- Success Icon -->
+    <div class="flex justify-center">
+      <div class="rounded-full bg-green-100 dark:bg-green-900/30 p-6">
+        <svg class="h-16 w-16 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Page Title -->
+    <div>
+      <h2 class="text-3xl font-serif font-bold text-gray-900 dark:text-white">
+        {% trans "Email Confirmed!" %}
+      </h2>
+      <p class="mt-4 text-sm text-gray-600 dark:text-gray-400 max-w-md mx-auto">
+        {% blocktrans with email=email %}
+          Your email address <strong class="text-gold-600 dark:text-gold-400">{{ email }}</strong> has been successfully confirmed.
+        {% endblocktrans %}
+      </p>
+    </div>
+
+    <!-- Success Message -->
+    <div class="p-4 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-200 dark:border-green-800">
+      <p class="text-sm text-green-800 dark:text-green-200">
+        {% trans "You can now access all features of your account. Welcome to Il Mercato Hotel!" %}
+      </p>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="space-y-3">
+      {% if user.is_authenticated %}
+        <a href="{% url 'home' %}" class="inline-flex items-center justify-center w-full rounded-xl px-6 py-3 text-sm font-bold uppercase tracking-wider transition-all duration-300 bg-gradient-to-r from-gold-400 to-gold-600 text-white shadow-lg shadow-gold-500/20 hover:from-gold-500 hover:to-gold-700 hover:shadow-gold-500/40 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500">
+          {% trans "Continue to Home" %}
+        </a>
+      {% else %}
+        <a href="{% url 'account_login' %}" class="inline-flex items-center justify-center w-full rounded-xl px-6 py-3 text-sm font-bold uppercase tracking-wider transition-all duration-300 bg-gradient-to-r from-gold-400 to-gold-600 text-white shadow-lg shadow-gold-500/20 hover:from-gold-500 hover:to-gold-700 hover:shadow-gold-500/40 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500">
+          {% trans "Sign In" %}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+{% endblock content %}

@@ -1,0 +1,75 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n %}
+{% load allauth account %}
+
+{% block head_title %}
+  {% trans "Confirm Email" %}
+{% endblock head_title %}
+
+{% block content %}
+  <div class="space-y-6">
+    {% if confirmation %}
+      <!-- Page Title -->
+      <div class="text-center">
+        <h2 class="text-3xl font-serif font-bold text-gray-900 dark:text-white">
+          {% trans "Confirm Your Email" %}
+        </h2>
+        <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+          {% trans "Please confirm that this is your email address" %}
+        </p>
+      </div>
+
+      <!-- Email Info -->
+      <div class="p-4 bg-gold-50 dark:bg-gold-900/20 rounded-xl border border-gold-200 dark:border-gold-800">
+        <p class="text-sm text-gray-700 dark:text-gray-300 text-center">
+          <span class="font-medium">{% trans "Email:" %}</span>
+          <span class="text-gold-600 dark:text-gold-400 font-bold">{{ confirmation.email_address.email }}</span>
+        </p>
+      </div>
+
+      <!-- Confirmation Form -->
+      {% url 'account_confirm_email' confirmation.key as action_url %}
+      {% element form method="post" action=action_url no_visible_fields=True %}
+        {% slot body %}
+          {% csrf_token %}
+        {% endslot %}
+        {% slot actions %}
+          <div class="space-y-4">
+            {% element button type="submit" tags="prominent,confirm" %}
+              {% trans "Confirm Email Address" %}
+            {% endelement %}
+
+            <!-- Additional Info -->
+            <p class="text-xs text-center text-gray-500 dark:text-gray-400">
+              {% trans "By confirming, you'll be able to access all features of your account." %}
+            </p>
+          </div>
+        {% endslot %}
+      {% endelement %}
+    {% else %}
+      <!-- Error State -->
+      <div class="text-center">
+        <div class="flex justify-center mb-6">
+          <div class="rounded-full bg-red-100 dark:bg-red-900/30 p-6">
+            <svg class="h-16 w-16 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+          </div>
+        </div>
+
+        <h2 class="text-3xl font-serif font-bold text-gray-900 dark:text-white">
+          {% trans "Invalid Confirmation Link" %}
+        </h2>
+        <p class="mt-4 text-sm text-gray-600 dark:text-gray-400 max-w-md mx-auto">
+          {% trans "This email confirmation link is invalid or has already been used." %}
+        </p>
+      </div>
+
+      <div>
+        <a href="{% url 'account_email' %}" class="inline-flex items-center justify-center w-full rounded-xl px-6 py-3 text-sm font-bold uppercase tracking-wider transition-all duration-300 bg-gradient-to-r from-gold-400 to-gold-600 text-white shadow-lg shadow-gold-500/20 hover:from-gold-500 hover:to-gold-700 hover:shadow-gold-500/40 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500">
+          {% trans "Manage Email Addresses" %}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+{% endblock content %}

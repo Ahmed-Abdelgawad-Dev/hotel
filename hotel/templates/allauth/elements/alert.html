@@ -1,7 +1,13 @@
 {% load i18n %}
 {% load allauth %}
 
-<div class="alert alert-error">
+<div class="p-4 mb-4 text-sm rounded-xl border-l-4
+{% if attrs.type == 'error' or attrs.type == 'danger' %}bg-red-50 dark:bg-red-900/30 text-red-800 dark:text-red-200 border-red-500
+{% elif attrs.type == 'warning' %}bg-yellow-50 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 border-yellow-500
+{% elif attrs.type == 'success' %}bg-green-50 dark:bg-green-900/30 text-green-800 dark:text-green-200 border-green-500
+{% elif attrs.type == 'info' %}bg-blue-50 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 border-blue-500
+{% else %}bg-red-50 dark:bg-red-900/30 text-red-800 dark:text-red-200 border-red-500
+{% endif %}" role="alert">
   {% slot message %}
-{% endslot %}
+  {% endslot %}
 </div>

@@ -1,14 +1,14 @@
 {% load static i18n %}
 <!DOCTYPE html>
-<html lang="en" class="h-full scroll-smooth" x-data="{ 
+<html lang="en" class="h-full scroll-smooth" x-data="{
           darkMode: localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches),
           scrollProgress: 0,
           showBackToTop: false,
           mobileMenuOpen: false
-      }" x-init="$watch('darkMode', val => { 
-                localStorage.setItem('theme', val ? 'dark' : 'light'); 
-                if (val) document.documentElement.classList.add('dark'); 
-                else document.documentElement.classList.remove('dark'); 
+      }" x-init="$watch('darkMode', val => {
+                localStorage.setItem('theme', val ? 'dark' : 'light');
+                if (val) document.documentElement.classList.add('dark');
+                else document.documentElement.classList.remove('dark');
              });
              if (darkMode) document.documentElement.classList.add('dark');
              window.addEventListener('scroll', () => {
@@ -24,52 +24,20 @@
   <title>{% block title %}Il Mercato Hotel - Sharm El Sheikh{% endblock title %}</title>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="{% static 'images/favicons/favicon-package/favicon.svg' %}">
+  <link rel="icon" type="image/png" href="{% static 'images/favicons/rounded-fav.png' %}">
+
+  <!-- Tailwind CSS -->
+  <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
 
   <!-- Alpine.js -->
-  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="{% static 'js/alpine.min.js' %}"></script>
 
-  <!-- Tailwind CSS (CDN) -->
-  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            gold: {
-              50: '#fbf8ea',
-              100: '#f5efc9',
-              200: '#ebde9a',
-              300: '#dfc763',
-              400: '#d4af37',
-              500: '#b99225',
-              600: '#a2781d',
-              700: '#835b1b',
-              800: '#6e4a1c',
-              900: '#5c3e1b',
-            },
-            dark: {
-              900: '#1a1a1a',
-              800: '#262626',
-              700: '#404040',
-            }
-          },
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            serif: ['Playfair Display', 'serif'],
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+  <!-- Application JavaScript -->
+  <script defer src="{% static 'js/app.js' %}"></script>
+  <script defer src="{% static 'js/main.js' %}"></script>
 
-    [x-cloak] {
-      display: none !important;
-    }
-  </style>
+  <!-- Notifications -->
+  <script defer src="{% static 'js/notifications.js' %}"></script>
 
   {% block extra_css %}{% endblock %}
 </head>
@@ -78,11 +46,11 @@
   class="h-full flex flex-col font-sans antialiased text-gray-900 bg-gray-50 dark:text-gray-100 dark:bg-gray-900 selection:bg-gold-500 selection:text-white transition-colors duration-300">
 
   <!-- Scroll Progress Bar -->
-  <div class="fixed top-0 left-0 h-1 bg-gradient-to-r from-gold-300 to-gold-600 z-[60] transition-all duration-100"
+  <div data-scroll-progress class="fixed top-0 left-0 h-1 bg-gradient-to-r from-gold-300 to-gold-600 z-[60] transition-all duration-100"
     :style="'width: ' + scrollProgress + '%'"></div>
 
   <!-- Back to Top Button -->
-  <button x-show="showBackToTop" x-transition:enter="transition ease-out duration-300"
+  <button data-back-to-top x-show="showBackToTop" x-transition:enter="transition ease-out duration-300"
     x-transition:enter-start="opacity-0 translate-y-8" x-transition:enter-end="opacity-100 translate-y-0"
     x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-y-0"
     x-transition:leave-end="opacity-0 translate-y-8" @click="window.scrollTo({top: 0, behavior: 'smooth'})"
@@ -144,21 +112,26 @@
               </svg>
             </button>
 
-            <div class="hidden sm:flex sm:items-center sm:gap-4">
+            <div class="hidden sm:flex sm:items-center sm:gap-3">
+              {% if request.user.is_authenticated %}
+              <form method="post" action="{% url 'account_logout' %}" class="inline">
+                {% csrf_token %}
+                <button type="submit" class="rounded-full border-2 px-6 py-2.5 text-sm font-bold transition-all hover:-translate-y-0.5 uppercase tracking-wider text-center cursor-pointer"
+                  :class="{ 'border-white text-white hover:bg-white hover:text-gray-900': !showBackToTop && !mobileMenuOpen, 'border-gold-500 text-gold-600 dark:text-gold-400 hover:bg-gold-500 hover:text-white': showBackToTop || mobileMenuOpen }">Sign Out</button>
+              </form>
+              {% else %}
+              <a class="rounded-full border-2 px-6 py-2.5 text-sm font-bold transition-all hover:-translate-y-0.5 uppercase tracking-wider text-center"
+                :class="{ 'border-white text-white hover:bg-white hover:text-gray-900': !showBackToTop && !mobileMenuOpen, 'border-gold-500 text-gold-600 dark:text-gold-400 hover:bg-gold-500 hover:text-white': showBackToTop || mobileMenuOpen }"
+                href="{% url 'account_login' %}">Login</a>
+              <a class="rounded-full border-2 px-6 py-2.5 text-sm font-bold transition-all hover:-translate-y-0.5 uppercase tracking-wider text-center"
+                :class="{ 'border-white text-white hover:bg-white hover:text-gray-900': !showBackToTop && !mobileMenuOpen, 'border-gold-500 text-gold-600 dark:text-gold-400 hover:bg-gold-500 hover:text-white': showBackToTop || mobileMenuOpen }"
+                href="{% url 'account_signup' %}">Register</a>
+              {% endif %}
+
               <a class="rounded-full bg-gradient-to-r from-gold-400 to-gold-600 px-8 py-3 text-sm font-bold text-white shadow-lg shadow-gold-500/20 transition-all hover:from-gold-500 hover:to-gold-700 hover:shadow-gold-500/40 hover:-translate-y-0.5 uppercase tracking-wider border border-transparent dark:border-gold-400/20"
                 href="{% url 'booking' %}">
                 Book A Stay
               </a>
-
-              {% if request.user.is_authenticated %}
-              <a class="rounded-full border-2 px-8 py-3 text-sm font-bold transition-all hover:-translate-y-0.5 uppercase tracking-wider text-center"
-                :class="{ 'border-white text-white hover:bg-white hover:text-gray-900': !showBackToTop && !mobileMenuOpen, 'border-gold-500 text-gold-600 dark:text-gold-400 hover:bg-gold-500 hover:text-white': showBackToTop || mobileMenuOpen }"
-                href="{% url 'account_logout' %}">Sign Out</a>
-              {% else %}
-              <a class="rounded-full border-2 px-8 py-3 text-sm font-bold transition-all hover:-translate-y-0.5 uppercase tracking-wider text-center"
-                :class="{ 'border-white text-white hover:bg-white hover:text-gray-900': !showBackToTop && !mobileMenuOpen, 'border-gold-500 text-gold-600 dark:text-gold-400 hover:bg-gold-500 hover:text-white': showBackToTop || mobileMenuOpen }"
-                href="{% url 'account_login' %}">Login</a>
-              {% endif %}
             </div>
 
             <div class="block md:hidden">
@@ -193,25 +166,28 @@
           href="#reviews">Reviews</a>
         <hr class="border-gray-200 dark:border-gray-800">
         <a class="text-gold-600 dark:text-gold-400 font-bold" href="{% url 'booking' %}">Book Now</a>
+        {% if request.user.is_authenticated %}
+        <form method="post" action="{% url 'account_logout' %}">
+          {% csrf_token %}
+          <button type="submit" class="text-gray-700 dark:text-gray-300 hover:text-gold-500 dark:hover:text-gold-400 font-bold text-left w-full cursor-pointer bg-transparent border-0 p-0">Sign Out</button>
+        </form>
+        {% else %}
+        <a class="text-gray-700 dark:text-gray-300 hover:text-gold-500 dark:hover:text-gold-400 font-bold"
+          href="{% url 'account_login' %}">Login</a>
+        <a class="text-gray-700 dark:text-gray-300 hover:text-gold-500 dark:hover:text-gold-400 font-bold"
+          href="{% url 'account_signup' %}">Register</a>
+        {% endif %}
       </nav>
     </div>
   </header>
 
   <!-- Main Content -->
   <main class="flex-grow">
+    <!-- Django Messages (will be converted to notifications by JS) -->
     {% if messages %}
-    <div class="fixed top-24 right-4 z-50 w-full max-w-sm px-4">
+    <div class="hidden">
       {% for message in messages %}
-      <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 5000)"
-        x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-x-8"
-        x-transition:enter-end="opacity-100 translate-x-0" x-transition:leave="transition ease-in duration-300"
-        x-transition:leave-start="opacity-100 translate-x-0" x-transition:leave-end="opacity-0 translate-x-8"
-        class="p-4 mb-4 text-sm rounded-xl shadow-lg backdrop-blur-md border-l-4" :class="{
-                        'bg-blue-100/90 dark:bg-blue-900/80 text-blue-800 dark:text-blue-100 border-blue-500': '{{ message.tags }}' == 'info', 
-                        'bg-green-100/90 dark:bg-green-900/80 text-green-800 dark:text-green-100 border-green-500': '{{ message.tags }}' == 'success',
-                        'bg-red-100/90 dark:bg-red-900/80 text-red-800 dark:text-red-100 border-red-500': '{{ message.tags }}' == 'error',
-                        'bg-yellow-100/90 dark:bg-yellow-900/80 text-yellow-800 dark:text-yellow-100 border-yellow-500': '{{ message.tags }}' == 'warning'
-                    }" role="alert">
+      <div role="alert" class="{% if message.tags %}{{ message.tags }}{% endif %}">
         {{ message }}
       </div>
       {% endfor %}

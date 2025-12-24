@@ -1,0 +1,15 @@
+{% load allauth %}
+
+<form {% if attrs.method %}method="{{ attrs.method }}"{% endif %}
+      {% if attrs.action %}action="{{ attrs.action }}"{% endif %}
+      {% if attrs.enctype %}enctype="{{ attrs.enctype }}"{% endif %}
+      class="space-y-6">
+  {% slot body %}
+  {% endslot %}
+  {% if slots.actions %}
+    <div class="space-y-4">
+      {% slot actions %}
+      {% endslot %}
+    </div>
+  {% endif %}
+</form>

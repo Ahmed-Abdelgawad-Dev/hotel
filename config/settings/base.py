@@ -286,6 +286,10 @@ ACCOUNT_FORMS = {"signup": "hotel.users.forms.UserSignupForm"}
 SOCIALACCOUNT_ADAPTER = "hotel.users.adapters.SocialAccountAdapter"
 # https://docs.allauth.org/en/latest/socialaccount/configuration.html
 SOCIALACCOUNT_FORMS = {"signup": "hotel.users.forms.UserSocialSignupForm"}
+# https://docs.allauth.org/en/latest/account/configuration.html
+ACCOUNT_LOGOUT_REDIRECT_URL = "home"
+# https://docs.allauth.org/en/latest/account/configuration.html
+ACCOUNT_LOGOUT_ON_POST = True
 # django-compressor
 # ------------------------------------------------------------------------------
 # https://django-compressor.readthedocs.io/en/latest/quickstart/#installation

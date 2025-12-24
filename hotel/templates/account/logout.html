@@ -1,0 +1,51 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n %}
+{% load allauth %}
+
+{% block head_title %}
+  {% trans "Sign Out" %}
+{% endblock head_title %}
+
+{% block content %}
+  <div class="space-y-6">
+    <!-- Page Title -->
+    <div class="text-center">
+      <h2 class="text-3xl font-serif font-bold text-gray-900 dark:text-white">
+        {% trans "Sign Out" %}
+      </h2>
+      <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+        {% trans "Are you sure you want to sign out?" %}
+      </p>
+    </div>
+
+    <!-- Info Icon -->
+    <div class="flex justify-center">
+      <div class="rounded-full bg-gray-100 dark:bg-gray-800 p-6">
+        <svg class="h-16 w-16 text-gray-600 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Logout Form -->
+    {% element form method="post" action="{% url 'account_logout' %}" no_visible_fields=True %}
+      {% slot body %}
+        {% csrf_token %}
+        {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+      {% endslot %}
+      {% slot actions %}
+        <div class="space-y-3">
+          {% element button type="submit" tags="prominent,danger" %}
+            {% trans "Yes, Sign Out" %}
+          {% endelement %}
+
+          <a href="{% url 'home' %}" class="inline-flex items-center justify-center w-full rounded-xl px-6 py-3 text-sm font-bold uppercase tracking-wider transition-all duration-300 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+            {% trans "Cancel" %}
+          </a>
+        </div>
+      {% endslot %}
+    {% endelement %}
+  </div>
+{% endblock content %}

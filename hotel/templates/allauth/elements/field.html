@@ -1,66 +1,91 @@
 {% load allauth %}
-{% load crispy_forms_tags %}
 
-{% if attrs.type == "textarea" %}
-  <div class="row mb-3">
-    <div class="col-sm-10">
-      <label for="{{ attrs.id }}">
-        {% slot label %}
-      {% endslot %}
-    </label>
-  </div>
-  <textarea {% if attrs.required %}required{% endif %}
-            {% if attrs.rows %}rows="{{ attrs.rows }}"{% endif %}
-            {% if attrs.disabled %}disabled{% endif %}
-            {% if attrs.readonly %}readonly{% endif %}
-            {% if attrs.checked %}checked{% endif %}
-            {% if attrs.name %}name="{{ attrs.name }}"{% endif %}
-            {% if attrs.id %}id="{{ attrs.id }}"{% endif %}
-            {% if attrs.placeholder %}placeholder="{{ attrs.placeholder }}"{% endif %}
-            class="form-control">{% slot value %}{% endslot %}</textarea>
-</div>
-{% elif attrs.type == "radio" %}
-<div class="row mb-3">
-  <div class="col-sm-10">
-    <div class="form-check">
-      <input {% if attrs.required %}required{% endif %}
-             {% if attrs.disabled %}disabled{% endif %}
-             {% if attrs.readonly %}readonly{% endif %}
-             {% if attrs.checked %}checked{% endif %}
-             {% if attrs.name %}name="{{ attrs.name }}"{% endif %}
-             {% if attrs.id %}id="{{ attrs.id }}"{% endif %}
-             {% if attrs.placeholder %}placeholder="{{ attrs.placeholder }}"{% endif %}
-             {% if attrs.autocomplete %}autocomplete="{{ attrs.autocomplete }}"{% endif %}
-             value="{{ attrs.value|default_if_none:"" }}"
-             type="{{ attrs.type }}" />
-      <label class="form-check-label" for="{{ attrs.id }}">
-        {% slot label %}
-      {% endslot %}
-    </label>
-  </div>
-</div>
-</div>
-{% else %}
-<div class="col-sm-10">
-  <label for="{{ attrs.id }}">
-    {% slot label %}
-  {% endslot %}
-</label>
-</div>
-<div class="col-sm-10">
+{% if attrs.type == "hidden" %}
   <input {% if attrs.required %}required{% endif %}
          {% if attrs.disabled %}disabled{% endif %}
          {% if attrs.readonly %}readonly{% endif %}
          {% if attrs.checked %}checked{% endif %}
          {% if attrs.name %}name="{{ attrs.name }}"{% endif %}
          {% if attrs.id %}id="{{ attrs.id }}"{% endif %}
-         {% if attrs.placeholder %}placeholder="{{ attrs.placeholder }}"{% endif %}
          {% if attrs.autocomplete %}autocomplete="{{ attrs.autocomplete }}"{% endif %}
          value="{{ attrs.value|default_if_none:"" }}"
-         type="{{ attrs.type }}"
-         class="form-control" />
-</div>
-{% endif %}
-{% if slots.help_text %}
-  <div class="form-text">{% slot help_text %}{% endslot %}</div>
+         type="{{ attrs.type }}" />
+{% elif attrs.type == "checkbox" %}
+  <div class="flex items-center space-x-3 mb-4">
+    <input {% if attrs.required %}required{% endif %}
+           {% if attrs.disabled %}disabled{% endif %}
+           {% if attrs.readonly %}readonly{% endif %}
+           {% if attrs.checked %}checked{% endif %}
+           {% if attrs.name %}name="{{ attrs.name }}"{% endif %}
+           {% if attrs.id %}id="{{ attrs.id }}"{% endif %}
+           {% if attrs.autocomplete %}autocomplete="{{ attrs.autocomplete }}"{% endif %}
+           value="{{ attrs.value|default_if_none:"" }}"
+           type="{{ attrs.type }}"
+           class="h-4 w-4 rounded border-gray-300 text-gold-600 focus:ring-gold-500 dark:border-gray-600 dark:bg-gray-800" />
+    <label for="{{ attrs.id }}" class="text-sm font-medium text-gray-700 dark:text-gray-300">
+      {% slot label %}
+      {% endslot %}
+    </label>
+  </div>
+{% elif attrs.type == "textarea" %}
+  <div class="mb-4">
+    <label for="{{ attrs.id }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+      {% slot label %}
+      {% endslot %}
+    </label>
+    <textarea {% if attrs.required %}required{% endif %}
+              {% if attrs.rows %}rows="{{ attrs.rows }}"{% endif %}
+              {% if attrs.disabled %}disabled{% endif %}
+              {% if attrs.readonly %}readonly{% endif %}
+              {% if attrs.name %}name="{{ attrs.name }}"{% endif %}
+              {% if attrs.id %}id="{{ attrs.id }}"{% endif %}
+              {% if attrs.placeholder %}placeholder="{{ attrs.placeholder }}"{% endif %}
+              class="w-full rounded-xl border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-3 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 shadow-sm focus:border-gold-500 focus:ring-gold-500 transition-colors">{% slot value %}{% endslot %}</textarea>
+    {% if slots.help_text %}
+      <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">{% slot help_text %}{% endslot %}</p>
+    {% endif %}
+    {% if slots.errors %}
+      <div class="mt-2 text-sm text-red-600 dark:text-red-400">{% slot errors %}{% endslot %}</div>
+    {% endif %}
+  </div>
+{% elif attrs.type == "radio" %}
+  <div class="flex items-center space-x-3 mb-4">
+    <input {% if attrs.required %}required{% endif %}
+           {% if attrs.disabled %}disabled{% endif %}
+           {% if attrs.readonly %}readonly{% endif %}
+           {% if attrs.checked %}checked{% endif %}
+           {% if attrs.name %}name="{{ attrs.name }}"{% endif %}
+           {% if attrs.id %}id="{{ attrs.id }}"{% endif %}
+           {% if attrs.autocomplete %}autocomplete="{{ attrs.autocomplete }}"{% endif %}
+           value="{{ attrs.value|default_if_none:"" }}"
+           type="{{ attrs.type }}"
+           class="h-4 w-4 border-gray-300 text-gold-600 focus:ring-gold-500 dark:border-gray-600" />
+    <label for="{{ attrs.id }}" class="text-sm font-medium text-gray-700 dark:text-gray-300">
+      {% slot label %}
+      {% endslot %}
+    </label>
+  </div>
+{% else %}
+  <div class="mb-4">
+    <label for="{{ attrs.id }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+      {% slot label %}
+      {% endslot %}
+    </label>
+    <input {% if attrs.required %}required{% endif %}
+           {% if attrs.disabled %}disabled{% endif %}
+           {% if attrs.readonly %}readonly{% endif %}
+           {% if attrs.name %}name="{{ attrs.name }}"{% endif %}
+           {% if attrs.id %}id="{{ attrs.id }}"{% endif %}
+           {% if attrs.placeholder %}placeholder="{{ attrs.placeholder }}"{% endif %}
+           {% if attrs.autocomplete %}autocomplete="{{ attrs.autocomplete }}"{% endif %}
+           value="{{ attrs.value|default_if_none:"" }}"
+           type="{{ attrs.type }}"
+           class="w-full rounded-xl border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-3 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 shadow-sm focus:border-gold-500 focus:ring-gold-500 transition-colors" />
+    {% if slots.help_text %}
+      <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">{% slot help_text %}{% endslot %}</p>
+    {% endif %}
+    {% if slots.errors %}
+      <div class="mt-2 text-sm text-red-600 dark:text-red-400">{% slot errors %}{% endslot %}</div>
+    {% endif %}
+  </div>
 {% endif %}

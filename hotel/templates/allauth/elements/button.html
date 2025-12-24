@@ -6,13 +6,14 @@
                       {% if attrs.id %}id="{{ attrs.id }}"{% endif %}
                       {% if attrs.name %}name="{{ attrs.name }}"{% endif %}
                       {% if attrs.type %}type="{{ attrs.type }}"{% endif %}
-                      class="btn
-{% if 'success' in attrs.tags %}btn-success
-{% elif 'warning' in attrs.tags %}btn-warning
-{% elif 'secondary' in attrs.tags %}btn-secondary
-{% elif 'danger' in attrs.tags %}btn-danger
-{% elif 'primary' in attrs.tags %}btn-primary
-{% else %}btn-primary
+                      class="w-full rounded-xl px-6 py-3 text-sm font-bold uppercase tracking-wider transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2
+{% if 'prominent' in attrs.tags %}bg-gradient-to-r from-gold-400 to-gold-600 text-white shadow-lg shadow-gold-500/20 hover:from-gold-500 hover:to-gold-700 hover:shadow-gold-500/40 hover:-translate-y-0.5 focus:ring-gold-500
+{% elif 'outline' in attrs.tags %}border-2 border-gold-500 text-gold-600 dark:text-gold-400 hover:bg-gold-500 hover:text-white hover:-translate-y-0.5 focus:ring-gold-500
+{% elif 'success' in attrs.tags %}bg-green-600 text-white hover:bg-green-700 shadow-lg hover:shadow-green-600/40 hover:-translate-y-0.5 focus:ring-green-500
+{% elif 'warning' in attrs.tags %}bg-yellow-600 text-white hover:bg-yellow-700 shadow-lg hover:shadow-yellow-600/40 hover:-translate-y-0.5 focus:ring-yellow-500
+{% elif 'danger' in attrs.tags %}bg-red-600 text-white hover:bg-red-700 shadow-lg hover:shadow-red-600/40 hover:-translate-y-0.5 focus:ring-red-500
+{% elif 'secondary' in attrs.tags %}bg-gray-600 dark:bg-gray-700 text-white hover:bg-gray-700 dark:hover:bg-gray-600 shadow-lg hover:shadow-gray-600/40 hover:-translate-y-0.5 focus:ring-gray-500
+{% else %}bg-gradient-to-r from-gold-400 to-gold-600 text-white shadow-lg shadow-gold-500/20 hover:from-gold-500 hover:to-gold-700 hover:shadow-gold-500/40 hover:-translate-y-0.5 focus:ring-gold-500
 {% endif %}"
 >
   {% slot %}

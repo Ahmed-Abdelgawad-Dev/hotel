@@ -1,0 +1,75 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n %}
+{% load allauth account %}
+
+{% block head_title %}
+  {% trans "Sign Up" %}
+{% endblock head_title %}
+
+{% block content %}
+  <div class="space-y-6">
+    <!-- Page Title -->
+    <div class="text-center">
+      <h2 class="text-3xl font-serif font-bold text-gray-900 dark:text-white">
+        {% trans "Create Account" %}
+      </h2>
+      <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+        {% trans "Join us for an exclusive luxury experience" %}
+      </p>
+    </div>
+
+    <!-- Sign In Link -->
+    <div class="text-center p-4 bg-gold-50 dark:bg-gold-900/20 rounded-xl border border-gold-200 dark:border-gold-800">
+      <p class="text-sm text-gray-700 dark:text-gray-300">
+        {% trans "Already have an account?" %}
+        <a href="{{ login_url }}" class="font-bold text-gold-600 dark:text-gold-400 hover:text-gold-700 dark:hover:text-gold-300 transition-colors">
+          {% trans "Sign in" %}
+        </a>
+      </p>
+    </div>
+
+    {% if SOCIALACCOUNT_ENABLED %}
+      <div>
+        {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+      </div>
+
+      <div class="relative">
+        <div class="absolute inset-0 flex items-center">
+          <div class="w-full border-t border-gray-300 dark:border-gray-600"></div>
+        </div>
+        <div class="relative flex justify-center text-sm">
+          <span class="px-4 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 font-medium">
+            {% trans "Or sign up with email" %}
+          </span>
+        </div>
+      </div>
+    {% endif %}
+
+    <!-- Signup Form -->
+    {% url 'account_signup' as action_url %}
+    {% element form form=form method="post" action=action_url tags="entrance,signup" %}
+      {% slot body %}
+        {% csrf_token %}
+        {% element fields form=form unlabeled=False %}
+        {% endelement %}
+        {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+      {% endslot %}
+      {% slot actions %}
+        <div class="space-y-4">
+          {% element button type="submit" tags="prominent,signup" %}
+            {% trans "Create Account" %}
+          {% endelement %}
+
+          <!-- Terms Notice -->
+          <p class="text-xs text-center text-gray-500 dark:text-gray-400">
+            {% blocktrans %}
+              By creating an account, you agree to our Terms of Service and Privacy Policy.
+            {% endblocktrans %}
+          </p>
+        </div>
+      {% endslot %}
+    {% endelement %}
+  </div>
+{% endblock content %}
