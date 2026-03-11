@@ -4,7 +4,10 @@
           darkMode: localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches),
           scrollProgress: 0,
           showBackToTop: false,
-          mobileMenuOpen: false
+          mobileMenuOpen: false,
+          isHome: '{{ request.resolver_match.url_name }}' === 'home',
+          get isTopLight() { return !this.showBackToTop && !this.mobileMenuOpen && !this.darkMode && !this.isHome; },
+          get isTopDark() { return !this.showBackToTop && !this.mobileMenuOpen && (this.darkMode || this.isHome); }
       }" x-init="$watch('darkMode', val => {
                 localStorage.setItem('theme', val ? 'dark' : 'light');
                 if (val) document.documentElement.classList.add('dark');
@@ -46,7 +49,8 @@
   class="h-full flex flex-col font-sans antialiased text-gray-900 bg-gray-50 dark:text-gray-100 dark:bg-gray-900 selection:bg-gold-500 selection:text-white transition-colors duration-300">
 
   <!-- Scroll Progress Bar -->
-  <div data-scroll-progress class="fixed top-0 left-0 h-1 bg-gradient-to-r from-gold-300 to-gold-600 z-[60] transition-all duration-100"
+  <div data-scroll-progress
+    class="fixed top-0 left-0 h-1 bg-gradient-to-r from-gold-300 to-gold-600 z-[60] transition-all duration-100"
     :style="'width: ' + scrollProgress + '%'"></div>
 
   <!-- Back to Top Button -->
@@ -77,21 +81,21 @@
           <nav aria-label="Global" class="hidden md:block">
             <ul class="flex items-center gap-8 text-sm font-bold font-sans tracking-wide uppercase">
               <li><a
-                  :class="{ 'text-white': !showBackToTop && !mobileMenuOpen, 'text-gray-700 dark:text-gray-300': showBackToTop || mobileMenuOpen }"
+                  :class="{ 'text-white': isTopDark, 'text-gray-800': isTopLight, 'text-gray-700 dark:text-gray-300': showBackToTop || mobileMenuOpen }"
                   class="transition hover:text-gold-500 dark:hover:text-gold-400" href="{% url 'home' %}"> Home </a>
               </li>
               <li><a
-                  :class="{ 'text-white': !showBackToTop && !mobileMenuOpen, 'text-gray-700 dark:text-gray-300': showBackToTop || mobileMenuOpen }"
+                  :class="{ 'text-white': isTopDark, 'text-gray-800': isTopLight, 'text-gray-700 dark:text-gray-300': showBackToTop || mobileMenuOpen }"
                   class="transition hover:text-gold-500 dark:hover:text-gold-400" href="#rooms"> Rooms </a></li>
               <li><a
-                  :class="{ 'text-white': !showBackToTop && !mobileMenuOpen, 'text-gray-700 dark:text-gray-300': showBackToTop || mobileMenuOpen }"
+                  :class="{ 'text-white': isTopDark, 'text-gray-800': isTopLight, 'text-gray-700 dark:text-gray-300': showBackToTop || mobileMenuOpen }"
                   class="transition hover:text-gold-500 dark:hover:text-gold-400" href="#offers"> Offers </a></li>
               <li><a
-                  :class="{ 'text-white': !showBackToTop && !mobileMenuOpen, 'text-gray-700 dark:text-gray-300': showBackToTop || mobileMenuOpen }"
+                  :class="{ 'text-white': isTopDark, 'text-gray-800': isTopLight, 'text-gray-700 dark:text-gray-300': showBackToTop || mobileMenuOpen }"
                   class="transition hover:text-gold-500 dark:hover:text-gold-400" href="{% url 'about' %}"> About </a>
               </li>
               <li><a
-                  :class="{ 'text-white': !showBackToTop && !mobileMenuOpen, 'text-gray-700 dark:text-gray-300': showBackToTop || mobileMenuOpen }"
+                  :class="{ 'text-white': isTopDark, 'text-gray-800': isTopLight, 'text-gray-700 dark:text-gray-300': showBackToTop || mobileMenuOpen }"
                   class="transition hover:text-gold-500 dark:hover:text-gold-400" href="#reviews"> Reviews </a></li>
             </ul>
           </nav>
@@ -99,7 +103,7 @@
           <div class="flex items-center gap-4">
             <!-- Theme Toggle -->
             <button @click="darkMode = !darkMode" class="p-2 rounded-full transition-colors"
-              :class="{ 'text-white hover:bg-white/10': !showBackToTop && !mobileMenuOpen, 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800': showBackToTop || mobileMenuOpen }">
+              :class="{ 'text-white hover:bg-white/10': isTopDark, 'text-gray-800 hover:bg-gray-100': isTopLight, 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800': showBackToTop || mobileMenuOpen }">
               <svg x-show="!darkMode" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -116,16 +120,15 @@
               {% if request.user.is_authenticated %}
               <form method="post" action="{% url 'account_logout' %}" class="inline">
                 {% csrf_token %}
-                <button type="submit" class="rounded-full border-2 px-6 py-2.5 text-sm font-bold transition-all hover:-translate-y-0.5 uppercase tracking-wider text-center cursor-pointer"
-                  :class="{ 'border-white text-white hover:bg-white hover:text-gray-900': !showBackToTop && !mobileMenuOpen, 'border-gold-500 text-gold-600 dark:text-gold-400 hover:bg-gold-500 hover:text-white': showBackToTop || mobileMenuOpen }">Sign Out</button>
+                <button type="submit"
+                  class="rounded-full border-2 px-6 py-2.5 text-sm font-bold transition-all hover:-translate-y-0.5 uppercase tracking-wider text-center cursor-pointer"
+                  :class="{ 'border-white text-white hover:bg-white hover:text-gray-900': isTopDark, 'border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white': isTopLight, 'border-gold-500 text-gold-600 dark:text-gold-400 hover:bg-gold-500 hover:text-white': showBackToTop || mobileMenuOpen }">Sign
+                  Out</button>
               </form>
               {% else %}
               <a class="rounded-full border-2 px-6 py-2.5 text-sm font-bold transition-all hover:-translate-y-0.5 uppercase tracking-wider text-center"
-                :class="{ 'border-white text-white hover:bg-white hover:text-gray-900': !showBackToTop && !mobileMenuOpen, 'border-gold-500 text-gold-600 dark:text-gold-400 hover:bg-gold-500 hover:text-white': showBackToTop || mobileMenuOpen }"
+                :class="{ 'border-white text-white hover:bg-white hover:text-gray-900': isTopDark, 'border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white': isTopLight, 'border-gold-500 text-gold-600 dark:text-gold-400 hover:bg-gold-500 hover:text-white': showBackToTop || mobileMenuOpen }"
                 href="{% url 'account_login' %}">Login</a>
-              <a class="rounded-full border-2 px-6 py-2.5 text-sm font-bold transition-all hover:-translate-y-0.5 uppercase tracking-wider text-center"
-                :class="{ 'border-white text-white hover:bg-white hover:text-gray-900': !showBackToTop && !mobileMenuOpen, 'border-gold-500 text-gold-600 dark:text-gold-400 hover:bg-gold-500 hover:text-white': showBackToTop || mobileMenuOpen }"
-                href="{% url 'account_signup' %}">Register</a>
               {% endif %}
 
               <a class="rounded-full bg-gradient-to-r from-gold-400 to-gold-600 px-8 py-3 text-sm font-bold text-white shadow-lg shadow-gold-500/20 transition-all hover:from-gold-500 hover:to-gold-700 hover:shadow-gold-500/40 hover:-translate-y-0.5 uppercase tracking-wider border border-transparent dark:border-gold-400/20"
@@ -136,7 +139,7 @@
 
             <div class="block md:hidden">
               <button @click="mobileMenuOpen = !mobileMenuOpen" class="p-2 rounded-lg transition-all duration-300"
-                :class="{ 'text-white hover:bg-white/10': !showBackToTop && !mobileMenuOpen, 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800': showBackToTop || mobileMenuOpen }">
+                :class="{ 'text-white hover:bg-white/10': isTopDark, 'text-gray-800 hover:bg-gray-100': isTopLight, 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800': showBackToTop || mobileMenuOpen }">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24"
                   stroke="currentColor" stroke-width="1.5">
                   <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round"
@@ -169,13 +172,13 @@
         {% if request.user.is_authenticated %}
         <form method="post" action="{% url 'account_logout' %}">
           {% csrf_token %}
-          <button type="submit" class="text-gray-700 dark:text-gray-300 hover:text-gold-500 dark:hover:text-gold-400 font-bold text-left w-full cursor-pointer bg-transparent border-0 p-0">Sign Out</button>
+          <button type="submit"
+            class="text-gray-700 dark:text-gray-300 hover:text-gold-500 dark:hover:text-gold-400 font-bold text-left w-full cursor-pointer bg-transparent border-0 p-0">Sign
+            Out</button>
         </form>
         {% else %}
         <a class="text-gray-700 dark:text-gray-300 hover:text-gold-500 dark:hover:text-gold-400 font-bold"
           href="{% url 'account_login' %}">Login</a>
-        <a class="text-gray-700 dark:text-gray-300 hover:text-gold-500 dark:hover:text-gold-400 font-bold"
-          href="{% url 'account_signup' %}">Register</a>
         {% endif %}
       </nav>
     </div>
