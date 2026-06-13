@@ -4,57 +4,63 @@
 
 <!-- HERO SECTION -->
 <section class="hero-section relative h-screen min-h-[700px] overflow-hidden" id="home">
-    <div class="absolute inset-0">
-        <img src="{% static 'images/landing.JPG' %}" alt="Il Mercato Hotel" class="w-full h-full object-cover hero-parallax-bg">
-        <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70"></div>
+  <div class="absolute inset-0">
+    <img src="{% static 'images/landing.JPG' %}" alt="Il Mercato Hotel"
+      class="w-full h-full object-cover hero-parallax-bg">
+    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70"></div>
+  </div>
+  <div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
+    <span class="text-gold tracking-[0.3em] uppercase text-sm mb-6 font-medium">Welcome to Paradise</span>
+    <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight"
+      style="text-shadow: 0 4px 30px rgba(0,0,0,0.3);">Il Mercato Hotel</h1>
+    <p class="text-lg md:text-xl text-white/80 mb-10 max-w-2xl">Where the Red Sea meets timeless elegance — your
+      sanctuary in Sharm El Sheikh.</p>
+    <div class="flex flex-col sm:flex-row gap-4">
+      <a href="#booking" class="btn-gold text-lg px-10 py-4">Book Your Stay</a>
+      <a href="#rooms"
+        class="btn-outline-gold text-lg px-10 py-4 text-white border-white hover:bg-white hover:text-gray-900">Explore
+        Rooms</a>
     </div>
-    <div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
-        <span class="text-gold tracking-[0.3em] uppercase text-sm mb-6 font-medium">Welcome to Paradise</span>
-        <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight" style="text-shadow: 0 4px 30px rgba(0,0,0,0.3);">Il Mercato Hotel</h1>
-        <p class="text-lg md:text-xl text-white/80 mb-10 max-w-2xl">Where the Red Sea meets timeless elegance — your sanctuary in Sharm El Sheikh.</p>
-        <div class="flex flex-col sm:flex-row gap-4">
-            <a href="#booking" class="btn-gold text-lg px-10 py-4">Book Your Stay</a>
-            <a href="#rooms" class="btn-outline-gold text-lg px-10 py-4 text-white border-white hover:bg-white hover:text-gray-900">Explore Rooms</a>
-        </div>
-        <div class="absolute bottom-10 animate-bounce">
-            <svg class="w-8 h-8 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
-        </div>
+    <div class="absolute bottom-10 animate-bounce">
+      <svg class="w-8 h-8 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+      </svg>
     </div>
+  </div>
 </section>
 
 <!-- BOOKING WIDGET -->
 <section id="booking" class="-mt-24 relative z-20 max-w-5xl mx-auto px-4">
-    <div class="booking-widget p-8 md:p-10 rounded-3xl shadow-2xl" x-data="{ checkIn: '', checkOut: '', adults: 2 }">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 items-end">
-            <div>
-                <label class="block text-sm font-semibold text-gray-600 mb-2 uppercase tracking-wider">Check In</label>
-                <input type="date" x-model="checkIn" :min="new Date().toISOString().split('T')[0]" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-gold focus:ring-1 focus:ring-gold outline-none">
-            </div>
-            <div>
-                <label class="block text-sm font-semibold text-gray-600 mb-2 uppercase tracking-wider">Check Out</label>
-                <input type="date" x-model="checkOut" :min="checkIn" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-gold focus:ring-1 focus:ring-gold outline-none">
-            </div>
-            <div>
-                <label class="block text-sm font-semibold text-gray-600 mb-2 uppercase tracking-wider">Guests</label>
-                <div class="flex items-center gap-3 px-4 py-3 rounded-xl border border-gray-200">
-                    <button @click="adults = Math.max(1, adults - 1)" class="text-gray-500 hover:text-gold text-xl font-bold">−</button>
-                    <span class="text-center flex-1 font-semibold" x-text="adults"></span>
-                    <button @click="adults = Math.min(6, adults + 1)" class="text-gray-500 hover:text-gold text-xl font-bold">+</button>
-                </div>
-            </div>
-            <div>
-                <button
-                    hx-get="/book/search/"
-                    hx-vars="'check_in:' + checkIn + ',check_out:' + checkOut + ',adults:' + adults"
-                    hx-target="#availability-results"
-                    hx-trigger="click"
-                    class="btn-gold w-full text-center text-lg py-4"
-                >
-                    Check Availability
-                </button>
-            </div>
+  <div class="booking-widget p-8 md:p-10 rounded-3xl shadow-2xl" x-data="{ checkIn: '', checkOut: '', adults: 2 }">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 items-end">
+      <div>
+        <label class="block text-sm font-semibold text-gray-600 mb-2 uppercase tracking-wider">Check In</label>
+        <input type="date" x-model="checkIn" :min="new Date().toISOString().split('T')[0]"
+          class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-gold focus:ring-1 focus:ring-gold outline-none">
+      </div>
+      <div>
+        <label class="block text-sm font-semibold text-gray-600 mb-2 uppercase tracking-wider">Check Out</label>
+        <input type="date" x-model="checkOut" :min="checkIn"
+          class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-gold focus:ring-1 focus:ring-gold outline-none">
+      </div>
+      <div>
+        <label class="block text-sm font-semibold text-gray-600 mb-2 uppercase tracking-wider">Guests</label>
+        <div class="flex items-center gap-3 px-4 py-3 rounded-xl border border-gray-200">
+          <button @click="adults = Math.max(1, adults - 1)"
+            class="text-gray-500 hover:text-gold text-xl font-bold">−</button>
+          <span class="text-center flex-1 font-semibold" x-text="adults"></span>
+          <button @click="adults = Math.min(6, adults + 1)"
+            class="text-gray-500 hover:text-gold text-xl font-bold">+</button>
         </div>
+      </div>
+      <div>
+        <button hx-get="/book/search/" hx-vars="'check_in:' + checkIn + ',check_out:' + checkOut + ',adults:' + adults"
+          hx-target="#availability-results" hx-trigger="click" class="btn-gold w-full text-center text-lg py-4">
+          Check Availability
+        </button>
+      </div>
     </div>
+  </div>
 </section>
 
 <!-- AVAILABILITY RESULTS -->
@@ -62,125 +68,133 @@
 
 <!-- ROOMS SECTION -->
 <section id="rooms" class="py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16 reveal">
-            <span class="text-gold tracking-[0.2em] uppercase text-sm font-semibold">Accommodations</span>
-            <h2 class="font-serif text-4xl md:text-5xl font-bold mt-3 mb-4">Luxury Rooms & Suites</h2>
-            <div class="section-divider"></div>
-            <p class="text-gray-600 max-w-2xl mx-auto text-lg">Each room is a masterpiece of design, offering breathtaking views and unparalleled comfort.</p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {% for room_type in room_types %}
-            <div class="room-card bg-white rounded-2xl overflow-hidden shadow-lg group cursor-pointer">
-                <div class="image-wrapper h-64 overflow-hidden">
-                    {% with hero=room_type.images.filter.first %}
-                    <img src="{% if hero %}{{ hero.image.url }}{% else %}{% static 'images/landing.JPG' %}{% endif %}" alt="{{ room_type.name }}" class="w-full h-full object-cover">
-                    {% endwith %}
-                </div>
-                <div class="p-6">
-                    <h3 class="font-serif text-xl font-bold mb-2">{{ room_type.name }}</h3>
-                    <p class="text-gray-500 text-sm mb-4 line-clamp-2">{{ room_type.short_description }}</p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-gold font-semibold text-lg">${{ room_type.base_price_per_night|floatformat:0 }}<span class="text-gray-400 text-sm font-normal">/night</span></span>
-                        <a href="/rooms/{{ room_type.slug }}/" class="btn-outline-gold text-sm px-5 py-2">View</a>
-                    </div>
-                </div>
-            </div>
-            {% empty %}
-            <div class="col-span-full text-center py-12 text-gray-400">
-                <p class="text-lg">Our rooms are being prepared. Check back soon!</p>
-            </div>
-            {% endfor %}
-        </div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 reveal">
+      <span class="text-gold tracking-[0.2em] uppercase text-sm font-semibold">Accommodations</span>
+      <h2 class="font-serif text-4xl md:text-5xl font-bold mt-3 mb-4">Rooms</h2>
+      <div class="section-divider"></div>
+      <p class="text-gray-600 max-w-2xl mx-auto text-lg">Each room is a masterpiece of design, offering breathtaking
+        views and unparalleled comfort.</p>
     </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {% for room_type in room_types %}
+      <div class="room-card bg-white rounded-2xl overflow-hidden shadow-lg group cursor-pointer">
+        <div class="image-wrapper h-64 overflow-hidden">
+          {% with hero=room_type.images.filter.first %}
+          <img src="{% if hero %}{{ hero.image.url }}{% else %}{% static 'images/landing.JPG' %}{% endif %}"
+            alt="{{ room_type.name }}" class="w-full h-full object-cover">
+          {% endwith %}
+        </div>
+        <div class="p-6">
+          <h3 class="font-serif text-xl font-bold mb-2">{{ room_type.name }}</h3>
+          <p class="text-gray-500 text-sm mb-4 line-clamp-2">{{ room_type.short_description }}</p>
+          <div class="flex items-center justify-between">
+            <span class="text-gold font-semibold text-lg">${{ room_type.base_price_per_night|floatformat:0 }}<span
+                class="text-gray-400 text-sm font-normal">/night</span></span>
+            <a href="/rooms/{{ room_type.slug }}/" class="btn-outline-gold text-sm px-5 py-2">View</a>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-span-full text-center py-12 text-gray-400">
+        <p class="text-lg">Our rooms are being prepared. Check back soon!</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 </section>
 
 <!-- GALLERY SECTION -->
 <section id="gallery" class="py-24 bg-cream">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16 reveal">
-            <span class="text-gold tracking-[0.2em] uppercase text-sm font-semibold">Memories</span>
-            <h2 class="font-serif text-4xl md:text-5xl font-bold mt-3 mb-4">Gallery</h2>
-            <div class="section-divider"></div>
-            <p class="text-gray-600 max-w-2xl mx-auto text-lg">Flip through our gallery to discover the beauty of Il Mercato.</p>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {% for img in gallery_images %}
-            <div class="gallery-card">
-                <div class="gallery-card-inner">
-                    <div class="gallery-card-front">
-                        <img src="{% if img.image %}{{ img.image.url }}{% else %}{% static 'images/landing.JPG' %}{% endif %}" alt="{{ img.alt_text }}" class="w-full h-full object-cover">
-                    </div>
-                    <div class="gallery-card-back">
-                        <h3 class="font-serif text-2xl text-gold mb-2">{{ img.caption|default:img.category|title }}</h3>
-                        <p class="text-gray-300">{{ img.alt_text }}</p>
-                    </div>
-                </div>
-            </div>
-            {% empty %}
-            <div class="col-span-full text-center py-12 text-gray-400">
-                <p class="text-lg">Gallery coming soon.</p>
-            </div>
-            {% endfor %}
-        </div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 reveal">
+      <span class="text-gold tracking-[0.2em] uppercase text-sm font-semibold">Memories</span>
+      <h2 class="font-serif text-4xl md:text-5xl font-bold mt-3 mb-4">Gallery</h2>
+      <div class="section-divider"></div>
+      <p class="text-gray-600 max-w-2xl mx-auto text-lg">Flip through our gallery to discover the beauty of Il Mercato.
+      </p>
     </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {% for img in gallery_images %}
+      <div class="gallery-card">
+        <div class="gallery-card-inner">
+          <div class="gallery-card-front">
+            <img src="{% if img.image %}{{ img.image.url }}{% else %}{% static 'images/landing.JPG' %}{% endif %}"
+              alt="{{ img.alt_text }}" class="w-full h-full object-cover">
+          </div>
+          <div class="gallery-card-back">
+            <h3 class="font-serif text-2xl text-gold mb-2">{{ img.caption|default:img.category|title }}</h3>
+            <p class="text-gray-300">{{ img.alt_text }}</p>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-span-full text-center py-12 text-gray-400">
+        <p class="text-lg">Gallery coming soon.</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 </section>
 
 <!-- OFFERS SECTION -->
 <section id="offers" class="py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16 reveal">
-            <span class="text-gold tracking-[0.2em] uppercase text-sm font-semibold">Special Offers</span>
-            <h2 class="font-serif text-4xl md:text-5xl font-bold mt-3 mb-4">Exclusive Packages</h2>
-            <div class="section-divider"></div>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {% for offer in offers %}
-            <div class="room-card bg-gradient-to-br from-gray-50 to-white rounded-2xl overflow-hidden shadow-lg border border-gray-100">
-                <div class="p-8">
-                    {% if offer.discount_percent %}
-                    <span class="inline-block bg-gold text-white text-sm font-bold px-4 py-1 rounded-full mb-4">{{ offer.discount_percent }}% OFF</span>
-                    {% endif %}
-                    <h3 class="font-serif text-2xl font-bold mb-3">{{ offer.title }}</h3>
-                    <p class="text-gray-600 mb-6">{{ offer.teaser }}</p>
-                    <a href="#booking" class="text-gold font-semibold hover:underline">Book Now →</a>
-                </div>
-            </div>
-            {% empty %}
-            <div class="col-span-full text-center py-12 text-gray-400">
-                <p class="text-lg">Check back for exclusive offers!</p>
-            </div>
-            {% endfor %}
-        </div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 reveal">
+      <span class="text-gold tracking-[0.2em] uppercase text-sm font-semibold">Special Offers</span>
+      <h2 class="font-serif text-4xl md:text-5xl font-bold mt-3 mb-4">Exclusive Packages</h2>
+      <div class="section-divider"></div>
     </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {% for offer in offers %}
+      <div
+        class="room-card bg-gradient-to-br from-gray-50 to-white rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+        <div class="p-8">
+          {% if offer.discount_percent %}
+          <span class="inline-block bg-gold text-white text-sm font-bold px-4 py-1 rounded-full mb-4">{{
+            offer.discount_percent }}% OFF</span>
+          {% endif %}
+          <h3 class="font-serif text-2xl font-bold mb-3">{{ offer.title }}</h3>
+          <p class="text-gray-600 mb-6">{{ offer.teaser }}</p>
+          <a href="#booking" class="text-gold font-semibold hover:underline">Book Now →</a>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-span-full text-center py-12 text-gray-400">
+        <p class="text-lg">Check back for exclusive offers!</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 </section>
 
 <!-- REVIEWS SECTION -->
 <section id="reviews" class="py-24 bg-dark text-white">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div class="reveal">
-            <span class="text-gold tracking-[0.2em] uppercase text-sm font-semibold">Testimonials</span>
-            <h2 class="font-serif text-4xl md:text-5xl font-bold mt-3 mb-4">What Our Guests Say</h2>
-            <div class="section-divider"></div>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-            {% for review in reviews %}
-            <div class="reveal reveal-delay-{{ forloop.counter0|stringformat:'i' }}" style="transition-delay: {{ forloop.counter0|add:1 }}00ms">
-                <div class="bg-white/10 rounded-2xl p-8 backdrop-blur-sm h-full">
-                    <div class="star-rating text-xl mb-4">
-                        {"★" * review.star_rating|default:5|floatformat:0}
-                    </div>
-                    <p class="text-gray-300 mb-6 italic leading-relaxed">"{{ review.body|truncatewords:30 }}"</p>
-                    <div class="font-semibold text-gold">{{ review.guest_display_name }}</div>
-                </div>
-            </div>
-            {% empty %}
-            <div class="col-span-full text-gray-400">
-                <p>Reviews coming soon!</p>
-            </div>
-            {% endfor %}
-        </div>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <div class="reveal">
+      <span class="text-gold tracking-[0.2em] uppercase text-sm font-semibold">Testimonials</span>
+      <h2 class="font-serif text-4xl md:text-5xl font-bold mt-3 mb-4">What Our Guests Say</h2>
+      <div class="section-divider"></div>
     </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+      {% for review in reviews %}
+      <div class="reveal reveal-delay-{{ forloop.counter0|stringformat:'i' }}"
+        style="transition-delay: {{ forloop.counter0|add:1 }}00ms">
+        <div class="bg-white/10 rounded-2xl p-8 backdrop-blur-sm h-full">
+          <div class="star-rating text-xl mb-4">
+            {"★" * review.star_rating|default:5|floatformat:0}
+          </div>
+          <p class="text-gray-300 mb-6 italic leading-relaxed">"{{ review.body|truncatewords:30 }}"</p>
+          <div class="font-semibold text-gold">{{ review.guest_display_name }}</div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-span-full text-gray-400">
+        <p>Reviews coming soon!</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 </section>
 
 {% endblock %}
