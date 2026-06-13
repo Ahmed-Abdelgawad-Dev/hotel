@@ -1,7 +1,44 @@
+"""Core abstract base models for the entire project."""
+
 from django.db import models
 from django.core.validators import MinValueValidator
 from decimal import Decimal
 
+
+# ──────────────────────────────────────────────
+# Abstract Base Classes (design.md §3.0)
+# ──────────────────────────────────────────────
+
+class TimestampedModel(models.Model):
+    """Adds created_at and updated_at fields."""
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
+
+
+class OrderedModel(models.Model):
+    """Adds sort_order field and ordering."""
+    sort_order = models.PositiveSmallIntegerField(default=0)
+
+    class Meta:
+        abstract = True
+        ordering = ["sort_order"]
+
+
+class PublishedModel(models.Model):
+    """Adds is_active and published_at fields for content publishing."""
+    is_active = models.BooleanField(default=True)
+    published_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        abstract = True
+
+
+# ──────────────────────────────────────────────
+# Legacy models (to be replaced by new apps)
+# ──────────────────────────────────────────────
 
 class RoomCategory(models.TextChoices):
     STANDARD = "standard", "Standard"
@@ -11,15 +48,12 @@ class RoomCategory(models.TextChoices):
 
 
 class Room(models.Model):
-    # Identity
     category = models.CharField(
         max_length=20,
         choices=RoomCategory.choices,
         default=RoomCategory.STANDARD,
         db_index=True,
     )
-
-    # Physical details
     size_sqm = models.DecimalField(
         max_digits=6,
         decimal_places=2,
@@ -40,13 +74,8 @@ class Room(models.Model):
         ],
     )
     extra_beds_allowed = models.BooleanField(default=False)
-
-    # Content
     description = models.TextField(blank=True)
-
-    # Status
     is_available = models.BooleanField(default=True, db_index=True)
-    # Timestamps
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -56,7 +85,7 @@ class Room(models.Model):
         verbose_name_plural = "Rooms"
 
     def __str__(self):
-        return f"{self.get_category_display()} — Room {self.room_number}"
+        return f"{self.get_category_display()}"
 
     @property
     def max_occupancy(self):
@@ -65,7 +94,6 @@ class Room(models.Model):
 
 class RoomImage(models.Model):
     """Additional gallery images for a room."""
-
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="images")
     image = models.ImageField(upload_to="rooms/gallery/")
     thumbnail = models.ImageField(upload_to="rooms/thumbnails/", blank=True, null=True)

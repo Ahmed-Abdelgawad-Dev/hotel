@@ -7,30 +7,12 @@ from django.views import defaults as default_views
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
-    path(
-        "about/",
-        TemplateView.as_view(template_name="pages/about.html"),
-        name="about",
-    ),
-    path(
-        "rooms/",
-        TemplateView.as_view(template_name="pages/rooms.html"),
-        name="rooms",
-    ),
-    path(
-        "booking/",
-        TemplateView.as_view(template_name="pages/booking.html"),
-        name="booking",
-    ),
-    # Django Admin, use {% url 'admin:index' %}
+    path("", include("hotel.urls")),
+    # Django Admin
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
     path("users/", include("hotel.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
-    # Your stuff: custom urls includes go here
-    # ...
-    # Media files
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
 ]
 
@@ -63,3 +45,4 @@ if settings.DEBUG:
             path("__debug__/", include(debug_toolbar.urls)),
             *urlpatterns,
         ]
+

@@ -272,3 +272,20 @@ hotel/media/
 
 .pytest_cache/
 download_assets.sh
+
+# Database
+db.sqlite3
+*.sqlite3
+
+# Scaffold scripts
+final_rebuild.py
+fix_*.py
+rebuild_*.py
+write_*.py
+update_settings.py
+design.md
+Design.md
+# Media files (user uploads)
+media/
+# Node modules
+JS/node_modules/

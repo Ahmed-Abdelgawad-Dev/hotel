@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 
 
-class CoreConfig(AppConfig):
+class BookingsConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "hotel.core"
-    verbose_name = "Core"
+    name = "hotel.bookings"
+    verbose_name = "Bookings"

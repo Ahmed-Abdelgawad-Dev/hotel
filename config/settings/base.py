@@ -89,6 +89,15 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "hotel.users",
     "hotel.core",
+    
+    "hotel.rooms",
+    "hotel.inventory",
+    "hotel.guests",
+    "hotel.bookings",
+    "hotel.payments",
+    "hotel.notifications",
+    "hotel.content",
+    "hotel.extranet",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
