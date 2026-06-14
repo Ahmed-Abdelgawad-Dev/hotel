@@ -1,0 +1,27 @@
+version: '3.9'
+# Production overrides with SSL, Sentry, and tighter security
+
+services:
+  web:
+    environment:
+      DJANGO_DEBUG: "false"
+      DJANGO_SECURE_SSL_REDIRECT: "true"
+      DJANGO_SECURE_HSTS_SECONDS: "518400"
+      SENTRY_DSN: "${SENTRY_DSN:-}"
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+
+  nginx:
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./docker/nginx.prod.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./docker/ssl:/etc/nginx/ssl:ro  # Mount SSL certs
